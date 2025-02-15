@@ -19,7 +19,7 @@
                 <h2 class="card-title text-dark">{{ $post['title'] }}</h2>
                 <p class="card-text text-muted"><strong>Tipo:</strong> {{ $post['type'] }}</p>
                 <p class="card-text text-dark">{{ \Illuminate\Support\Str::limit($post['body'], 150) }}</p>
-                <a href="#" class="btn btn-outline-primary mt-3">Leer más</a>
+                <a href="{{ url('post/'.$post['id']) }}" class="btn btn-outline-primary mt-3">Leer más</a>
             </div>
         </div>
         @endforeach

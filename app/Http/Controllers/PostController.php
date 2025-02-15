@@ -64,4 +64,24 @@ class PostController extends Controller
             return view('index', ['posts' => []]);
         }
     }
+
+    public function show($id)
+    {
+        // Realizamos la solicitud a la API para obtener el detalle de la publicación
+        $response = Http::get("http://127.0.0.1:8000/api/posts/{$id}");
+
+        // Verificamos si la respuesta fue exitosa
+        if ($response->successful()) {
+            // Obtener los datos de la respuesta
+            $post = $response->json();
+
+            // Pasamos los datos de la publicación a la vista
+            return view('show', [
+                'post' => $post['data'],  // Los datos de la publicación
+            ]);
+        } else {
+            // Si la solicitud no es exitosa, redirigimos a la página principal
+            return redirect()->route('index')->with('error', 'Publicación no encontrada');
+        }
+    }
 }
