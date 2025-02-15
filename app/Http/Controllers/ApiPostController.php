@@ -42,6 +42,7 @@ class ApiPostController extends Controller
         $validated = $request->validate([
             'title' => 'required|string',
             'body' => 'required|string',
+            'type' => 'required|in:Reseñas de productos,Noticias de Apple,Consejos y trucos,Comparativas,Tutoriales,Accesorios Apple,Apple en el trabajo y productividad',
         ]);
 
         $slug = Str::slug($request->title);
@@ -50,6 +51,7 @@ class ApiPostController extends Controller
             'title' => $validated['title'],
             'slug' => $slug,
             'body' => $validated['body'],
+            'type' => $validated['type'],
         ]);
 
         return response()->json([

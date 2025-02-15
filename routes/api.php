@@ -3,6 +3,6 @@
 use App\Http\Controllers\ApiPostController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [ApiPostController::class, 'index']);
-Route::get('/{id}', [ApiPostController::class, 'show']);
-Route::post('/', [ApiPostController::class, 'store']);
+Route::get('/posts', [ApiPostController::class, 'index']);
+Route::get('/posts/{id}', [ApiPostController::class, 'show']);
+Route::post('/posts', [ApiPostController::class, 'store']);
