@@ -59,4 +59,15 @@ class ApiPostController extends Controller
             'message' => 'Post creado exitosamente'
         ], 201);
     }
+
+    public function getPostsByType($type)
+    {
+        $posts = Post::where('type', $type)->get();
+
+        if ($posts->isEmpty()) {
+            return response()->json(['message' => 'No posts found for this type.'], 404);
+        }
+
+        return response()->json($posts);
+    }
 }
