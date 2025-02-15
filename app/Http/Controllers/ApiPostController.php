@@ -8,12 +8,18 @@ use Illuminate\Support\Str;
 
 class ApiPostController extends Controller
 {
-    // Obtener todas las entradas
+    // Obtener todas las entradas con paginación
     public function index()
     {
-        $posts = Post::all();
+        // Cambia '10' por el número de posts por página que desees
+        $posts = Post::paginate(3);
+
         return response()->json([
-            'data' => $posts,
+            'data' => $posts->items(), // Se pasan solo los items de la página actual
+            'current_page' => $posts->currentPage(),
+            'last_page' => $posts->lastPage(),
+            'per_page' => $posts->perPage(),
+            'total' => $posts->total(),
             'message' => 'Succeed'
         ], 200);
     }
@@ -62,7 +68,7 @@ class ApiPostController extends Controller
 
     public function getPostsByType($type)
     {
-        $posts = Post::where('type', $type)->get();
+        $posts = Post::where('type', $type)->paginate(3);  // Paginación por tipo
 
         if ($posts->isEmpty()) {
             return response()->json(['message' => 'No posts found for this type.'], 404);

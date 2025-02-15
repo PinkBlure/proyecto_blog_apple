@@ -7,20 +7,61 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $response = Http::get('http://127.0.0.1:8000/api/posts/');
+        // Obtenemos el número de página de los parámetros de la solicitud (default es 1)
+        $page = $request->get('page', 1);
+
+        // Realizamos la solicitud a la API con el número de página
+        $response = Http::get('http://127.0.0.1:8000/api/posts', [
+            'page' => $page  // Pasamos el número de página
+        ]);
 
         // Verificamos si la respuesta fue exitosa
         if ($response->successful()) {
             // Obtener los datos de la respuesta
-            $posts = $response->json(); // Esto devolverá un array de posts.
+            $posts = $response->json(); // Esto devolverá un array de posts
+
+            // Pasamos los datos de paginación y posts a la vista
+            return view('index', [
+                'posts' => $posts['data'],  // Los datos de las publicaciones
+                'current_page' => $posts['current_page'],  // Página actual
+                'last_page' => $posts['last_page'],  // Última página
+                'total' => $posts['total'],  // Total de posts
+                'per_page' => $posts['per_page'],  // Posts por página
+            ]);
         } else {
             // Si la solicitud no es exitosa, pasamos un arreglo vacío
-            $posts = [];
+            return view('index', ['posts' => []]);
         }
+    }
 
-        // Pasamos los posts a la vista 'posts.index'
-        return view('index', compact('posts'));
+    public function showByType(Request $request, $type)
+    {
+        // Obtenemos el número de página de los parámetros de la solicitud (default es 1)
+        $page = $request->get('page', 1);
+
+        // Realizamos la solicitud a la API para obtener los posts por tipo
+        $response = Http::get("http://127.0.0.1:8000/api/posts/type/{$type}", [
+            'page' => $page  // Pasamos el número de página
+        ]);
+
+        // Verificamos si la respuesta fue exitosa
+        if ($response->successful()) {
+            // Obtener los datos de la respuesta
+            $posts = $response->json();
+
+            // Pasamos los datos de paginación y posts a la vista
+            return view('index', [
+                'posts' => $posts['data'],  // Los datos de las publicaciones
+                'current_page' => $posts['current_page'],  // Página actual
+                'last_page' => $posts['last_page'],  // Última página
+                'total' => $posts['total'],  // Total de posts
+                'per_page' => $posts['per_page'],  // Posts por página
+            ]);
+        } else {
+            // Si la solicitud no es exitosa, pasamos un arreglo vacío
+            return view('index', ['posts' => []]);
+        }
     }
 }

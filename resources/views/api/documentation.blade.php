@@ -10,13 +10,14 @@
     <p><strong>Ruta:</strong> <code>/api/posts</code></p>
     <p><strong>Método:</strong> GET</p>
     <p><strong>Descripción:</strong> Obtiene una lista de todos los posts publicados en el blog.</p>
+    <p><strong>Paginación:</strong> Este endpoint admite paginación. Puedes pasar un parámetro <code>page</code> para obtener una página específica de los posts. El número de posts por página está configurado por defecto en 3, pero puedes ajustarlo según sea necesario.</p>
     <pre>
     <code>
-    GET /api/posts HTTP/1.1
+    GET /api/posts?page=2 HTTP/1.1
     Host: tu-dominio.com
     </code>
     </pre>
-    <p><strong>Respuesta:</strong> Lista de todos los posts en formato JSON.</p>
+    <p><strong>Respuesta:</strong> Lista de posts en formato JSON con información de paginación.</p>
     <pre>
     <code>
     {
@@ -36,10 +37,24 @@
                 "type": "Noticias de Apple"
             }
         ],
-        "message": "Succeed"
+        "message": "Succeed",
+        "pagination": {
+            "current_page": 2,
+            "total_pages": 5,
+            "per_page": 10,
+            "total_count": 50
+        }
     }
     </code>
     </pre>
+
+    <p><strong>Explicación de la paginación:</strong> La respuesta incluye un objeto <code>pagination</code> con la siguiente información:</p>
+    <ul>
+        <li><strong>current_page:</strong> El número de la página actual solicitada.</li>
+        <li><strong>total_pages:</strong> El número total de páginas disponibles.</li>
+        <li><strong>per_page:</strong> El número de posts por página (por defecto, 10).</li>
+        <li><strong>total_count:</strong> El número total de posts disponibles en la base de datos.</li>
+    </ul>
 
     <h3>Obtener un post por ID</h3>
     <p><strong>Ruta:</strong> <code>/api/posts/{id}</code></p>
@@ -104,13 +119,14 @@
     <p><strong>Ruta:</strong> <code>/api/posts/type/{type}</code></p>
     <p><strong>Método:</strong> GET</p>
     <p><strong>Descripción:</strong> Obtiene los posts filtrados por tipo.</p>
+    <p><strong>Paginación:</strong> También puedes utilizar el parámetro <code>page</code> al obtener posts por tipo. Esto te permitirá obtener un conjunto específico de posts para cada tipo.</p>
     <pre>
     <code>
-    GET /api/posts/type/Reseñas%20de%20productos HTTP/1.1
+    GET /api/posts/type/Reseñas%20de%20productos?page=1 HTTP/1.1
     Host: tu-dominio.com
     </code>
     </pre>
-    <p><strong>Respuesta:</strong> Lista de posts filtrados por tipo.</p>
+    <p><strong>Respuesta:</strong> Lista de posts filtrados por tipo en formato JSON con información de paginación.</p>
     <pre>
     <code>
     {
@@ -123,7 +139,13 @@
                 "type": "Reseñas de productos"
             }
         ],
-        "message": "Succeed"
+        "message": "Succeed",
+        "pagination": {
+            "current_page": 1,
+            "total_pages": 3,
+            "per_page": 10,
+            "total_count": 30
+        }
     }
     </code>
     </pre>

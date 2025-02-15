@@ -40,13 +40,13 @@
             Publicaciones
           </button>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ url('/posts/type/Reseñas%20de%20productos') }}">Reseñas de productos</a>
-            <a class="dropdown-item" href="{{ url('/posts/type/Noticias%20de%20Apple') }}">Noticias de Apple</a>
-            <a class="dropdown-item" href="{{ url('/posts/type/Consejos%20y%20trucos') }}">Consejos y trucos</a>
+            <a class="dropdown-item" href="{{ url('/posts/type/Reseñas de productos') }}">Reseñas de productos</a>
+            <a class="dropdown-item" href="{{ url('/posts/type/Noticias de Apple') }}">Noticias de Apple</a>
+            <a class="dropdown-item" href="{{ url('/posts/type/Consejos y trucos') }}">Consejos y trucos</a>
             <a class="dropdown-item" href="{{ url('/posts/type/Comparativas') }}">Comparativas</a>
             <a class="dropdown-item" href="{{ url('/posts/type/Tutoriales') }}">Tutoriales</a>
-            <a class="dropdown-item" href="{{ url('/posts/type/Accesorios%20Apple') }}">Accesorios Apple</a>
-            <a class="dropdown-item" href="{{ url('/posts/type/Apple%20en%20el%20trabajo%20y%20productividad') }}">Apple en el trabajo y productividad</a>
+            <a class="dropdown-item" href="{{ url('/posts/type/Accesorios Apple') }}">Accesorios Apple</a>
+            <a class="dropdown-item" href="{{ url('/posts/type/Apple en el trabajo y productividad') }}">Apple en el trabajo y productividad</a>
           </div>
         </div>
         <a class="nav-link text-white" href="/api-documentation">Documentación API</a>
@@ -70,13 +70,13 @@
               <a class="nav-link text-white" href="/">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="{{ url('/posts/type/Reseñas%20de%20productos') }}">Reseñas de productos</a>
+              <a class="nav-link text-white" href="{{ url('/posts/type/Reseñas de productos') }}">Reseñas de productos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="{{ url('/posts/type/Noticias%20de%20Apple') }}">Noticias de Apple</a>
+              <a class="nav-link text-white" href="{{ url('/posts/type/Noticias de Apple') }}">Noticias de Apple</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="{{ url('/posts/type/Consejos%20y%20trucos') }}">Consejos y trucos</a>
+              <a class="nav-link text-white" href="{{ url('/posts/type/Consejos y trucos') }}">Consejos y trucos</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-white" href="{{ url('/posts/type/Comparativas') }}">Comparativas</a>
@@ -85,10 +85,10 @@
               <a class="nav-link text-white" href="{{ url('/posts/type/Tutoriales') }}">Tutoriales</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="{{ url('/posts/type/Accesorios%20Apple') }}">Accesorios Apple</a>
+              <a class="nav-link text-white" href="{{ url('/posts/type/Accesorios Apple') }}">Accesorios Apple</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="{{ url('/posts/type/Apple%20en%20el%20trabajo%20y%20productividad') }}">Apple en el trabajo y productividad</a>
+              <a class="nav-link text-white" href="{{ url('/posts/type/Apple en el trabajo y productividad') }}">Apple en el trabajo y productividad</a>
             </li>
           </ul>
         </nav>
