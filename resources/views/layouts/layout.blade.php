@@ -53,8 +53,26 @@
       </div>
 
       <div class="d-flex">
-        <a class="nav-link text-white" href="#">Iniciar sesión</a>
-        <a class="nav-link text-white" href="#">Quiero participar en el blog</a>
+        @if(Cookie::get('user_session'))
+        <!-- Si el usuario está logueado, muestra los botones "Dashboard" y "Cerrar sesión" en una fila -->
+
+        <!-- Botón de Dashboard -->
+        <a href="{{ route('admin') }}" class="btn btn-link nav-link text-white" style="background: none; border: none; margin-right: 15px;">
+          Dashboard
+        </a>
+
+        <!-- Formulario de Cerrar sesión -->
+        <form action="{{ route('logout') }}" method="POST" style="margin-bottom: 0;">
+          @csrf
+          <button type="submit" class="btn btn-link nav-link text-white" style="background: none; border: none;">
+            Cerrar sesión
+          </button>
+        </form>
+        @else
+        <!-- Si el usuario no está logueado, muestra "Iniciar sesión" y "Quiero participar en el blog" -->
+        <a class="nav-link text-white" href="{{ route('login') }}">Iniciar sesión</a>
+        <a class="nav-link text-white" href="{{ route('register') }}">Quiero participar en el blog</a>
+        @endif
       </div>
     </nav>
 
