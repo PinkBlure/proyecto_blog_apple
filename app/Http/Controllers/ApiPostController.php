@@ -76,4 +76,34 @@ class ApiPostController extends Controller
 
         return response()->json($posts);
     }
+
+    public function update(Request $request, $id)
+{
+    // Validación de los datos del post (esto es solo un ejemplo)
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'slug' => 'required|string|max:255|unique:posts,slug,' . $id,
+        'body' => 'required|string',
+        'type' => 'required|string|in:Reseñas de productos,Noticias de Apple,Consejos y trucos,Comparativas,Tutoriales,Accesorios Apple,Apple en el trabajo y productividad'
+    ]);
+
+    // Buscar el post por ID
+    $post = Post::find($id);
+
+    if (!$post) {
+        return response()->json(['message' => 'Post no encontrado'], 404);
+    }
+
+    // Actualizar los valores del post
+    $post->title = $request->input('title');
+    $post->slug = $request->input('slug');
+    $post->body = $request->input('body');
+    $post->type = $request->input('type');
+
+    // Guardar el post actualizado
+    $post->save();
+
+    return response()->json(['message' => 'Post actualizado con éxito', 'post' => $post], 200);
+}
+
 }

@@ -115,4 +115,41 @@ class PostController extends Controller
             return back()->with('error', $errorMessage);
         }
     }
+
+    public function edit($id)
+    {
+        // Llamar a la API para obtener los datos del post
+        $response = Http::get('http://127.0.0.1:8000/api/posts/' . $id); // Cambia la URL por la URL correcta de tu API
+
+        // Verificar si la solicitud fue exitosa
+        if ($response->successful()) {
+            $post = $response->json(); // Esta es la respuesta que viene desde la API
+
+            // Pasar los datos a la vista
+            return view('admin.edit', ['post' => $post['data']]); // Accedemos a los datos reales del post
+        } else {
+            // Si no se puede obtener el post, redirigir con un mensaje de error
+            return redirect()->route('admin')->with('error', 'No se pudo encontrar el post.');
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Validación de los datos del post
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+            'body' => 'required|string',
+            'type' => 'required|string'
+        ]);
+
+        // Realizar la solicitud PUT a la API para actualizar el post
+        $response = Http::put('http://127.0.0.1:8000/api/posts/' . $id, $validated); // Cambia la URL de tu API
+
+        if ($response->successful()) {
+            return redirect()->route('admin')->with('success', 'Post actualizado con éxito');
+        } else {
+            return redirect()->route('admin.edit', $id)->with('error', 'No se pudo actualizar el post');
+        }
+    }
 }

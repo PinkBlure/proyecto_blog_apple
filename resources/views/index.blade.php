@@ -19,6 +19,9 @@
                 <h2 class="card-title text-dark">{{ $post['title'] }}</h2>
                 <p class="card-text text-muted"><strong>Tipo:</strong> {{ $post['type'] }}</p>
                 <p class="card-text text-dark">{{ \Illuminate\Support\Str::limit($post['body'], 150) }}</p>
+                @if(Cookie::get('user_session'))
+                <a href="{{ url('post/'.$post['id'].'/edit') }}" class="btn btn-outline-secondary mt-3">Editar</a>
+                @endif
                 <a href="{{ url('post/'.$post['id']) }}" class="btn btn-outline-primary mt-3">Leer más</a>
             </div>
         </div>
