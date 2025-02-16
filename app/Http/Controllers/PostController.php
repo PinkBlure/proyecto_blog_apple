@@ -84,4 +84,35 @@ class PostController extends Controller
             return redirect()->route('index')->with('error', 'Publicación no encontrada');
         }
     }
+
+    public function create()
+    {
+        return view('admin.create'); // Vista donde los usuarios pueden crear un nuevo post
+    }
+
+    public function store(Request $request)
+    {
+        // Validamos los datos enviados
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'body' => 'required|string',
+            'type' => 'required|in:Reseñas de productos,Noticias de Apple,Consejos y trucos,Comparativas,Tutoriales,Accesorios Apple,Apple en el trabajo y productividad',
+        ]);
+
+        // Realizamos la llamada a la API para crear el post
+        $response = Http::post('http://127.0.0.1:8000/api/posts', [
+            'title' => $validated['title'],
+            'body' => $validated['body'],
+            'type' => $validated['type'],
+        ]);
+
+        // Verificamos si la llamada fue exitosa
+        if ($response->successful()) {
+            return redirect()->route('admin')->with('success', 'Post creado exitosamente');
+        } else {
+            // Si no es exitoso, verificamos el mensaje de error de la respuesta
+            $errorMessage = $response->json()['message'] ?? 'Hubo un error al crear el post holi';  // Obtenemos el mensaje de error si existe
+            return back()->with('error', $errorMessage);
+        }
+    }
 }
