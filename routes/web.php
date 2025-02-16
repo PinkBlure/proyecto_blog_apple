@@ -24,9 +24,9 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::get('/posts/create', [PostController::class, 'create'])->name('createPost');
 Route::post('/posts', [PostController::class, 'store'])->name('storePost');
-// Ruta para mostrar el formulario de edición del post
 Route::get('post/{id}/edit', [PostController::class, 'edit'])->name('admin.edit');
-// Ruta para actualizar el post
 Route::put('post/{id}', [PostController::class, 'update'])->name('admin.update');
+Route::delete('/post/{id}', [PostController::class, 'destroy'])->name('post.destroy');
+
 
 

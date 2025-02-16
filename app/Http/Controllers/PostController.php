@@ -152,4 +152,16 @@ class PostController extends Controller
             return redirect()->route('admin.edit', $id)->with('error', 'No se pudo actualizar el post');
         }
     }
+
+    public function destroy($id)
+    {
+        // Realiza la solicitud DELETE a la API para eliminar el post
+        $response = Http::delete("http://127.0.0.1:8000/api/posts/{$id}");
+
+        if ($response->successful()) {
+            return redirect()->route('admin')->with('success', 'Post eliminado con éxito');
+        } else {
+            return redirect()->route('admin')->with('error', 'Hubo un problema al eliminar el post');
+        }
+    }
 }

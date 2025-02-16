@@ -21,6 +21,11 @@
                 <p class="card-text text-dark">{{ \Illuminate\Support\Str::limit($post['body'], 150) }}</p>
                 @if(Cookie::get('user_session'))
                 <a href="{{ url('post/'.$post['id'].'/edit') }}" class="btn btn-outline-secondary mt-3">Editar</a>
+                <form action="{{ url('post/'.$post['id']) }}" method="POST" style="display:inline-block;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-outline-danger mt-3" onclick="return confirm('¿Estás seguro de que deseas eliminar este post?')">Eliminar</button>
+                </form>
                 @endif
                 <a href="{{ url('post/'.$post['id']) }}" class="btn btn-outline-primary mt-3">Leer más</a>
             </div>

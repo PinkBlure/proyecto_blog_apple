@@ -78,32 +78,49 @@ class ApiPostController extends Controller
     }
 
     public function update(Request $request, $id)
-{
-    // Validación de los datos del post (esto es solo un ejemplo)
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'slug' => 'required|string|max:255|unique:posts,slug,' . $id,
-        'body' => 'required|string',
-        'type' => 'required|string|in:Reseñas de productos,Noticias de Apple,Consejos y trucos,Comparativas,Tutoriales,Accesorios Apple,Apple en el trabajo y productividad'
-    ]);
+    {
+        // Validación de los datos del post (esto es solo un ejemplo)
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:posts,slug,' . $id,
+            'body' => 'required|string',
+            'type' => 'required|string|in:Reseñas de productos,Noticias de Apple,Consejos y trucos,Comparativas,Tutoriales,Accesorios Apple,Apple en el trabajo y productividad'
+        ]);
 
-    // Buscar el post por ID
-    $post = Post::find($id);
+        // Buscar el post por ID
+        $post = Post::find($id);
 
-    if (!$post) {
-        return response()->json(['message' => 'Post no encontrado'], 404);
+        if (!$post) {
+            return response()->json(['message' => 'Post no encontrado'], 404);
+        }
+
+        // Actualizar los valores del post
+        $post->title = $request->input('title');
+        $post->slug = $request->input('slug');
+        $post->body = $request->input('body');
+        $post->type = $request->input('type');
+
+        // Guardar el post actualizado
+        $post->save();
+
+        return response()->json(['message' => 'Post actualizado con éxito', 'post' => $post], 200);
     }
 
-    // Actualizar los valores del post
-    $post->title = $request->input('title');
-    $post->slug = $request->input('slug');
-    $post->body = $request->input('body');
-    $post->type = $request->input('type');
+    public function destroy($id)
+    {
+        // Buscar el post por ID
+        $post = Post::find($id);
 
-    // Guardar el post actualizado
-    $post->save();
+        // Verificar si el post existe
+        if ($post) {
+            // Eliminar el post
+            $post->delete();
 
-    return response()->json(['message' => 'Post actualizado con éxito', 'post' => $post], 200);
-}
+            // Retornar una respuesta exitosa
+            return response()->json(['message' => 'Post eliminado exitosamente'], 200);
+        }
 
+        // Si el post no existe, retornar un error
+        return response()->json(['message' => 'Post no encontrado'], 404);
+    }
 }
