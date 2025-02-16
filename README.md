@@ -87,12 +87,16 @@ A continuación se describen las rutas disponibles para interactuar con la API d
 **Método:** `GET`  
 **Descripción:** Obtiene todos los posts publicados en el blog.
 
+![Mi imagen](./images/prueba_1.png)
+
 ---
 
 ### 2. Obtener un post por ID
 **Ruta:** `/api/posts/{id}`  
 **Método:** `GET`  
 **Descripción:** Obtiene los detalles de un post específico utilizando su ID.
+
+![Mi imagen](./images/prueba_2.png)
 
 ---
 
@@ -105,12 +109,20 @@ A continuación se describen las rutas disponibles para interactuar con la API d
 - `title`: El título del post.
 - `body`: El contenido del post.
 
+![Mi imagen](./images/prueba_3.png)
+
 ---
 
 ### 4. Obtener posts por tipo
 **Ruta:** `/api/posts/type/{type}`  
 **Método:** `GET`  
 **Descripción:** Obtiene los posts filtrados por tipo.
+
+![Mi imagen](./images/prueba_4.png)
+
+**Prueba de paginación:**
+
+![Mi imagen](./images/prueba_5.png)
 
 ---
 
@@ -125,12 +137,17 @@ A continuación se describen las rutas disponibles para interactuar con la API d
 - `body`: El contenido actualizado del post.
 - `type`: El tipo de post.
 
+![Mi imagen](./images/prueba_6.png)
+
 ---
 
 ### 6. Eliminar un post
 **Ruta:** `/api/posts/{id}`  
 **Método:** `DELETE`  
 **Descripción:** Elimina un post especificado por su ID.
+
+![Mi imagen](./images/prueba_7.png)
+
 
 ---
 
